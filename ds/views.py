@@ -63,3 +63,11 @@ def deletefata(request, x):
 
 
     
+def order_detail(request):
+    orders = order_detail.objects.filter(product__seller=product_name)
+    context = {
+        'orders': orders,
+        'total_sales': sum(order.product.price * order.quantity for order in orders),
+    }
+
+    return render(request,"orderdetails.html")

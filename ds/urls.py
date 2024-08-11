@@ -14,5 +14,6 @@ urlpatterns = [
     path("forget-password",views.forget_password),
     path("add_product",views.add_product),
     path("delte-record/<int:x>",views.deletefata),
+    path("order_detail",views.order_detail),
 
     ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
