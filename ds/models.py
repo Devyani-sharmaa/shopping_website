@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 
@@ -23,3 +23,21 @@ class Order(models.Model):
     quantity = models.PositiveIntegerField()
     order_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=50, choices=[('Pending', 'Pending'), ('Shipped', 'Shipped'), ('Delivered', 'Delivered')])
+
+
+
+
+
+class User(AbstractUser):
+
+     email = models.EmailField(unique=True)
+
+     username = models.CharField(max_length=100)
+
+
+     USERNAME_FIELD = "email"
+
+     REQUIRED_FIELDS = ['username']
+
+     def _str_(self):
+          return self.username
