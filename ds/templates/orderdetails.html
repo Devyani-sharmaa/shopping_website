@@ -18,12 +18,12 @@
             </tr>
         </thead>
         <tbody>
-            {% for order in orders %}
+            {% for x in my_dataa%}
                 <tr>
-                    <td>{{ order.product.name }}</td>
-                    <td>{{ order.quantity }}</td>
-                    <td>{{ order.status }}</td>
-                    <td>{{ order.order_date }}</td>
+                    <td>{{ x.product }}</td>
+                    <td>{{ x.quantity }}</td>
+                    <td>{{ x.status }}</td>
+                    <td>{{ x.order_date }}</td>
                 </tr>
             {% endfor %}
         </tbody>

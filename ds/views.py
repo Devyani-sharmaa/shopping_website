@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
-
+from ds.models import Order
 
 
 
@@ -47,8 +47,8 @@ def saveproduct(request):
         rating=request.POST.get("rate")
         out_of=request.POST.get("orate")
         image1=request.POST.get("img1")
-        image2=request.POST.get("img2")
-        image3=request.POST.get("img3")
+        # image2=request.POST.get("img2")
+        # image3=request.POST.get("img3")
         price=request.POST.get("price")
         data=add_product(product_name=product_name,price_description=price_description,price=price, old_price=old_price, rating=rating ,out_of=out_of,image1=image1,image2=image2,image3=image3)
     data.save()
@@ -66,10 +66,13 @@ def deletefata(request, x):
 def order_detail(request):
     # if request.method=="POST":
     #     product=request.Post.get("Product")
+    #     price=request.Post.et("price")
     #     quantity=request.Post.get("quantity")
     #     order_date=request.Post.get("order_date")
     #     status=request.Post.get("status")
 
-    #     dt=order_detail(product=product,quantity=quantity,order_date=order_date,status=status)
+    #     dt=order_detail(product=product,price=price,quantity=quantity,order_date=order_date,status=status)
     # dt.save()
-    return render(request,"orderdetails.html")
+
+    z=Order.objects.all()
+    return render(request,"orderdetails.html",{"my_dataa":z}) 

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
 from ds.models import add_product
+from ds.models import Order
 
 
 
@@ -24,7 +25,8 @@ def about(request):
 
 
 def cart(request):
-    return render(request,"cart.html")
+    z=Order.objects.all()
+    return render(request,"cart.html",{"my_dataa":z})
 
 
 def index(request):
