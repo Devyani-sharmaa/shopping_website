@@ -62,7 +62,7 @@ def deletefata(request, x):
     return redirect('add_product.html')
 
 
-    
+     
 def order_detail(request):
     # if request.method=="POST":
     #     product=request.Post.get("Product")

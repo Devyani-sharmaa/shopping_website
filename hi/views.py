@@ -6,12 +6,28 @@ from ds.models import add_product
 from ds.models import Order
 
 
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from hi.models import UserCheck
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url="/login")
 def index(request):
+    user = User.objects.get(username = request.user)
+    check_seller = UserCheck.objects.filter(userx = user).last()
+    print(check_seller, "xxxxxxxxxxx")
+    if check_seller:
+        if check_seller.is_seller:
+                return render(request, "home.html")
+        else:
+                return HttpResponse("your are not authorize....")
+    else:
+            return HttpResponse("your are not authorize....")
     return render(request,"index.html") 
 
 
+@login_required(login_url="/login")
 def productsidebar(request):
     y=add_product.objects.all()
     return render(request,"product-sidebar.html",{"my_data":y})
@@ -66,3 +82,41 @@ def order(request):
 
 def faq(request):
     return render(request,"faq.html")
+
+
+
+def loginpage(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        passwrd = request.POST.get("pass")
+
+        checkuser = authenticate(username = username, password = passwrd)
+
+        if checkuser is not None:
+            login(request, checkuser)
+            return redirect("/hi/index")
+
+
+    return render(request, "loginpage.html")
+
+def signuppage(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        first_name = request.POST.get("fname")
+        last_name = request.POST.get("lname")
+        email = request.POST.get("email")
+        passsword = request.POST.get("pass")
+
+        newuser = User.objects.create_user(username = username, first_name = first_name, last_name = last_name, email = email, password = passsword)
+        newuser.save()
+
+        checkdata = UserCheck(userx = newuser, is_seller = True)
+        checkdata.save()
+
+    return render(request, "signuppage.html")
+
+
+
+def logutnow(request):
+    logout(request)
+    return redirect("/hi/index")

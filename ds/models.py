@@ -14,7 +14,7 @@ class add_product(models.Model):
     #  image2=models.ImageField(upload_to="productimage",null=True,blank=True)
     #  image3=models.ImageField(upload_to="productimage",null=True,blank=True)
 
-
+ 
 
 
 

@@ -9,7 +9,7 @@ urlpatterns = [
     path("product-info",views.productinfo),
     path("about",views.about),
     path("cart",views.cart,name='z'),
-    path("index",views.index),
+    path("index",views.index,name="index"),
     path('user-profile',views.user_profile),
     path("become-vendor",views.become_vendor),
     path("checkout",views.checkout),
@@ -18,5 +18,8 @@ urlpatterns = [
     #path("add_to_cart",views.add_to_cart),
     path("create-account",views.create_account),
     path("order",views.order),
-    path("faq",views.faq)
+    path("faq",views.faq),
+    path("login", views.loginpage, name = "loginpage"),
+    path("signup", views.signuppage, name = "signuppage"),
+    path("lets-logout", views.logutnow, name = "logout"),
     ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
